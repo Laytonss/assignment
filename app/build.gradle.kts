@@ -78,6 +78,12 @@ dependencies {
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofitConverter)
+    implementation("tech.thdev:flow-call-adapter-factory:1.0.0")
+    //viewmodel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    //livedata
+    implementation("androidx.compose.runtime:runtime-livedata")
 }
 
 kapt {
