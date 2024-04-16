@@ -1,5 +1,8 @@
 package com.thoughtworks.assignment
 
+import com.thoughtworks.assignment.data.repository.TweetRepository
+import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -12,6 +15,10 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        runBlocking {
+            TweetRepository().fetchTweets().collect {
+                assertEquals(22, it.size)
+            }
+        }
     }
 }
