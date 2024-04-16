@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -26,6 +27,21 @@ enum class BottomNavigationItem {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyApp() {
+    val homeNavController = rememberNavController()
+    NavHost(homeNavController, startDestination = "HomeContent") {
+        composable("HomeContent") {
+            HomeContent(homeNavController)
+        }
+        composable("Moments") {
+            MomentsPage()
+        }
+    }
+}
+
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun HomeContent(homeNavController: NavHostController) {
     val navController = rememberNavController()
     val (selectedItem, setSelectedItem) = remember { mutableStateOf(BottomNavigationItem.DISCOVER) }
     val title = when (selectedItem) {
@@ -54,18 +70,14 @@ fun MyApp() {
                 EmptyPage()
             }
             composable("Discover") {
-                DiscoverPage(navController, modifier = Modifier.padding(innerPadding))
+                DiscoverPage(homeNavController, modifier = Modifier.padding(innerPadding))
             }
             composable("Me") {
                 EmptyPage()
             }
-            composable("Moments") {
-                MomentsPage()
-            }
         }
     }
 }
-
 
 
 @Composable
