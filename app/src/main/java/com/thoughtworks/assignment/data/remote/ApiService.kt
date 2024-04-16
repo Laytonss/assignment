@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("moments-data/tweets.json")
-    suspend fun getTweets(): List<Tweet>
+    fun getTweets(): Flow<List<Tweet>>
 }

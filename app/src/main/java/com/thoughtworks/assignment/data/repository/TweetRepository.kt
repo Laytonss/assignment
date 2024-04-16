@@ -7,8 +7,6 @@ import kotlinx.coroutines.flow.flow
 
 class TweetRepository {
     fun fetchTweets(): Flow<List<Tweet>> {
-        return flow {
-            emit(RetrofitClient.apiService.getTweets())
-        }
+        return RetrofitClient.apiService.getTweets()
     }
 }
