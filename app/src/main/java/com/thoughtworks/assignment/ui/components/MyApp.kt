@@ -1,7 +1,9 @@
 package com.thoughtworks.assignment.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
@@ -59,13 +62,16 @@ fun MyApp() {
 @Composable
 fun AppBottomBar(selectedItem: BottomNavigationItem, onItemSelected: (BottomNavigationItem) -> Unit) {
     BottomAppBar(
+        containerColor = Color(0xFF19191E),
         actions = {
             Row(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(5.dp)
             ) {
-                val weightModifier = Modifier.weight(1f).fillMaxSize()
+                val weightModifier = Modifier
+                    .weight(1f)
+                    .fillMaxSize()
                 ClickableColumn(
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.CHATS) },
@@ -107,8 +113,8 @@ fun ClickableColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(icon, contentDescription = text)
-        Text(text = text)
+        Icon(icon, contentDescription = text, tint = Color.White)
+        Text(text = text, color = Color.White)
     }
 }
 
@@ -119,4 +125,10 @@ fun DiscoverPage(modifier: Modifier) {
 
 @Composable
 fun EmptyPage() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.Black)
+    ) {
+    }
 }
