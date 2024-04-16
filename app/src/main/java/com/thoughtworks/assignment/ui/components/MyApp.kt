@@ -18,6 +18,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.thoughtworks.assignment.ui.utils.Utils.getCurrentRoute
 
 
 enum class BottomNavigationItem {
@@ -44,22 +45,17 @@ fun MyApp() {
 fun HomeContent(homeNavController: NavHostController) {
     val navController = rememberNavController()
     val (selectedItem, setSelectedItem) = remember { mutableStateOf(BottomNavigationItem.DISCOVER) }
-    val title = when (selectedItem) {
-        BottomNavigationItem.CHATS -> "Chats"
-        BottomNavigationItem.CONTACTS -> "Contacts"
-        BottomNavigationItem.DISCOVER -> "Discover"
-        BottomNavigationItem.ME -> "Me"
-    }
+    val title = getCurrentRoute(navController)
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = title) },
+                title = { Text(text = title ?: "wrong title") },
                 colors = topAppBarColors(containerColor = Color.Black, titleContentColor = Color.White)
             )
         },
         bottomBar = {
-            AppBottomBar(navController,selectedItem) { newItem -> setSelectedItem(newItem) }
+            AppBottomBar(navController, selectedItem) { newItem -> setSelectedItem(newItem) }
         },
     ) { innerPadding ->
         NavHost(navController, startDestination = "Discover") {
