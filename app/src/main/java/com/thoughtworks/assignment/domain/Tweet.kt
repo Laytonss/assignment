@@ -2,7 +2,6 @@ package com.thoughtworks.assignment.domain
 
 import com.google.gson.annotations.SerializedName
 
-
 data class Tweet(
     val content: String? = null,
     val images: List<Image>? = null,
