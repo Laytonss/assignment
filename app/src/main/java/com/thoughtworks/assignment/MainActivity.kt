@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.thoughtworks.assignment.ui.components.MyApp
 import com.thoughtworks.assignment.ui.theme.AssignmentTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,9 +20,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AssignmentTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-
+                    MyApp()
                 }
             }
         }
