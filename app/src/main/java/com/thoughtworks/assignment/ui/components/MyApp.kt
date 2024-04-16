@@ -1,28 +1,26 @@
 package com.thoughtworks.assignment.ui.components
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Chat
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Contacts
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Explore
-import androidx.compose.material.icons.filled.Image
-import androidx.compose.material.icons.filled.Mic
-import androidx.compose.material.icons.filled.People
+import androidx.compose.material.icons.filled.Group
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 
@@ -62,32 +60,56 @@ fun MyApp() {
 fun AppBottomBar(selectedItem: BottomNavigationItem, onItemSelected: (BottomNavigationItem) -> Unit) {
     BottomAppBar(
         actions = {
-            IconButton(onClick = { onItemSelected(BottomNavigationItem.CHATS) }, modifier = Modifier.weight(1f)) {
-                Column {
-                    Icon(Icons.Filled.Chat, contentDescription = "Localized description")
-                    Text(text = "Chats")
-                }
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(5.dp)
+            ) {
+                val weightModifier = Modifier.weight(1f).fillMaxSize()
+                ClickableColumn(
+                    modifier = weightModifier,
+                    onClick = { onItemSelected(BottomNavigationItem.CHATS) },
+                    icon = Icons.Filled.Chat,
+                    text = "Chats"
+                )
+                ClickableColumn(
+                    modifier = weightModifier,
+                    onClick = { onItemSelected(BottomNavigationItem.CONTACTS) },
+                    icon = Icons.Filled.Group,
+                    text = "Contacts"
+                )
+                ClickableColumn(
+                    modifier = weightModifier,
+                    onClick = { onItemSelected(BottomNavigationItem.DISCOVER) },
+                    icon = Icons.Filled.Explore,
+                    text = "Discover"
+                )
+                ClickableColumn(
+                    modifier = weightModifier,
+                    onClick = { onItemSelected(BottomNavigationItem.ME) },
+                    icon = Icons.Filled.Person,
+                    text = "Me"
+                )
             }
-            IconButton(onClick = { onItemSelected(BottomNavigationItem.CONTACTS) }, modifier = Modifier.weight(1f)) {
-                Column {
-                    Icon(Icons.Filled.People, contentDescription = "Localized description")
-                    Text(text = "Contacts")
-                }
-            }
-            IconButton(onClick = { onItemSelected(BottomNavigationItem.DISCOVER) }, modifier = Modifier.weight(1f)) {
-                Column {
-                    Icon(Icons.Filled.Explore, contentDescription = "Localized description")
-                    Text(text = "Discover")
-                }
-            }
-            IconButton(onClick = { onItemSelected(BottomNavigationItem.ME) }, modifier = Modifier.weight(1f)) {
-                Column {
-                    Icon(Icons.Filled.Person, contentDescription = "Localized description")
-                    Text(text = "Me")
-                }
-            }
-        },
+        }
     )
+}
+
+@Composable
+fun ClickableColumn(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    icon: ImageVector,
+    text: String
+) {
+    Column(
+        modifier = modifier.clickable { onClick() },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(icon, contentDescription = text)
+        Text(text = text)
+    }
 }
 
 @Composable
