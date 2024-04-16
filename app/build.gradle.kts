@@ -85,6 +85,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     //livedata
     implementation("androidx.compose.runtime:runtime-livedata")
+    //navigation
+    implementation("androidx.navigation:navigation-compose:2.4.0")
 }
 
 kapt {
