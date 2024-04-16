@@ -8,13 +8,15 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 
 enum class BottomNavigationItem {
@@ -24,6 +26,7 @@ enum class BottomNavigationItem {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyApp() {
+    val navController = rememberNavController()
     val (selectedItem, setSelectedItem) = remember { mutableStateOf(BottomNavigationItem.DISCOVER) }
     val title = when (selectedItem) {
         BottomNavigationItem.CHATS -> "Chats"
@@ -40,28 +43,30 @@ fun MyApp() {
             )
         },
         bottomBar = {
-            AppBottomBar(selectedItem) { newItem -> setSelectedItem(newItem) }
+            AppBottomBar(navController,selectedItem) { newItem -> setSelectedItem(newItem) }
         },
     ) { innerPadding ->
-        when (selectedItem) {
-            BottomNavigationItem.CHATS -> {
+        NavHost(navController, startDestination = "Discover") {
+            composable("Chats") {
                 EmptyPage()
             }
-
-            BottomNavigationItem.CONTACTS -> {
+            composable("Contacts") {
                 EmptyPage()
             }
-
-            BottomNavigationItem.DISCOVER -> {
-                DiscoverPage(modifier = Modifier.padding(innerPadding))
+            composable("Discover") {
+                DiscoverPage(navController, modifier = Modifier.padding(innerPadding))
             }
-
-            BottomNavigationItem.ME -> {
+            composable("Me") {
                 EmptyPage()
+            }
+            composable("Moments") {
+                MomentsPage()
             }
         }
     }
 }
+
+
 
 @Composable
 fun EmptyPage() {

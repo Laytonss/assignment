@@ -1,6 +1,7 @@
 package com.thoughtworks.assignment.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,16 +26,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
-fun DiscoverPage(modifier:Modifier) {
+fun DiscoverPage(navController: NavHostController, modifier: Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
         Column {
-            DiscoverItem(Icons.Filled.Language, Color.Cyan, "Moments")
+            DiscoverItem(Icons.Filled.Language, Color.Cyan, "Moments") { navController.navigate("Moments") }
             Spacer(modifier = Modifier.height(5.dp))
             DiscoverItem(Icons.Filled.WifiChannel, Color.Yellow, "Channels")
             DiscoverItem(Icons.Filled.Radar, Color.Red, "Live")
@@ -50,9 +52,11 @@ fun DiscoverItem(
     icon: ImageVector,
     iconColor: Color,
     text: String,
+    onClick: () -> Unit = {},
 ) {
     Row(
         modifier = Modifier
+            .clickable { onClick() }
             .fillMaxWidth()
             .height(60.dp)
             .background(Color(0xFF19191E)),
@@ -60,9 +64,11 @@ fun DiscoverItem(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Icon(icon, contentDescription = text, tint = iconColor, modifier = Modifier.padding(start = 10.dp))
-        Text(text = text, color = Color.White, modifier = Modifier
-            .weight(1f)
-            .padding(start = 20.dp))
-        Icon(Icons.Filled.ArrowForwardIos, contentDescription = text, tint = Color.Gray,modifier = Modifier.padding(end = 10.dp))
+        Text(
+            text = text, color = Color.White, modifier = Modifier
+                .weight(1f)
+                .padding(start = 20.dp)
+        )
+        Icon(Icons.Filled.ArrowForwardIos, contentDescription = text, tint = Color.Gray, modifier = Modifier.padding(end = 10.dp))
     }
 }

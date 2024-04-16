@@ -15,14 +15,17 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
-fun AppBottomBar(selectedItem: BottomNavigationItem, onItemSelected: (BottomNavigationItem) -> Unit) {
+fun AppBottomBar(navController: NavHostController, selectedItem: BottomNavigationItem, onItemSelected: (BottomNavigationItem) -> Unit) {
     BottomAppBar(
         containerColor = Color(0xFF19191E),
         actions = {
@@ -36,31 +39,31 @@ fun AppBottomBar(selectedItem: BottomNavigationItem, onItemSelected: (BottomNavi
                     .fillMaxSize()
                 BottomBarItem(
                     modifier = weightModifier,
-                    onClick = { onItemSelected(BottomNavigationItem.CHATS) },
+                    onClick = { navController.navigate("Chats") },
                     icon = Icons.Filled.Chat,
                     text = "Chats",
-                    isSelected = selectedItem == BottomNavigationItem.CHATS
+                    isSelected = currentRoute(navController) == "Chats"
                 )
                 BottomBarItem(
                     modifier = weightModifier,
-                    onClick = { onItemSelected(BottomNavigationItem.CONTACTS) },
+                    onClick = { navController.navigate("Contacts") },
                     icon = Icons.Filled.Group,
                     text = "Contacts",
-                    isSelected = selectedItem == BottomNavigationItem.CONTACTS
+                    isSelected = currentRoute(navController) == "Contacts"
                 )
                 BottomBarItem(
                     modifier = weightModifier,
-                    onClick = { onItemSelected(BottomNavigationItem.DISCOVER) },
+                    onClick = { navController.navigate("Discover") },
                     icon = Icons.Filled.Explore,
                     text = "Discover",
-                    isSelected = selectedItem == BottomNavigationItem.DISCOVER
+                    isSelected = currentRoute(navController) == "Discover"
                 )
                 BottomBarItem(
                     modifier = weightModifier,
-                    onClick = { onItemSelected(BottomNavigationItem.ME) },
+                    onClick = { navController.navigate("Me") },
                     icon = Icons.Filled.Person,
                     text = "Me",
-                    isSelected = selectedItem == BottomNavigationItem.ME
+                    isSelected = currentRoute(navController) == "Me"
                 )
             }
         }
@@ -88,4 +91,10 @@ fun BottomBarItem(
         Icon(icon, contentDescription = text, tint = currentColor)
         Text(text = text, color = currentColor)
     }
+}
+
+@Composable
+private fun currentRoute(navController: NavHostController): String? {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route
 }
