@@ -76,25 +76,29 @@ fun AppBottomBar(selectedItem: BottomNavigationItem, onItemSelected: (BottomNavi
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.CHATS) },
                     icon = Icons.Filled.Chat,
-                    text = "Chats"
+                    text = "Chats",
+                    isSelected = selectedItem == BottomNavigationItem.CHATS
                 )
                 ClickableColumn(
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.CONTACTS) },
                     icon = Icons.Filled.Group,
-                    text = "Contacts"
+                    text = "Contacts",
+                    isSelected = selectedItem == BottomNavigationItem.CONTACTS
                 )
                 ClickableColumn(
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.DISCOVER) },
                     icon = Icons.Filled.Explore,
-                    text = "Discover"
+                    text = "Discover",
+                    isSelected = selectedItem == BottomNavigationItem.DISCOVER
                 )
                 ClickableColumn(
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.ME) },
                     icon = Icons.Filled.Person,
-                    text = "Me"
+                    text = "Me",
+                    isSelected = selectedItem == BottomNavigationItem.ME
                 )
             }
         }
@@ -106,15 +110,21 @@ fun ClickableColumn(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     icon: ImageVector,
-    text: String
+    text: String,
+    isSelected: Boolean
 ) {
+    val currentColor = if (isSelected) {
+        Color.Green
+    } else {
+        Color.White
+    }
     Column(
         modifier = modifier.clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(icon, contentDescription = text, tint = Color.White)
-        Text(text = text, color = Color.White)
+        Icon(icon, contentDescription = text, tint = currentColor)
+        Text(text = text, color = currentColor)
     }
 }
 
