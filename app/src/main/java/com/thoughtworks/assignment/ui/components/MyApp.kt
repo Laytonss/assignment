@@ -72,28 +72,28 @@ fun AppBottomBar(selectedItem: BottomNavigationItem, onItemSelected: (BottomNavi
                 val weightModifier = Modifier
                     .weight(1f)
                     .fillMaxSize()
-                ClickableColumn(
+                BottomBarItem(
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.CHATS) },
                     icon = Icons.Filled.Chat,
                     text = "Chats",
                     isSelected = selectedItem == BottomNavigationItem.CHATS
                 )
-                ClickableColumn(
+                BottomBarItem(
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.CONTACTS) },
                     icon = Icons.Filled.Group,
                     text = "Contacts",
                     isSelected = selectedItem == BottomNavigationItem.CONTACTS
                 )
-                ClickableColumn(
+                BottomBarItem(
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.DISCOVER) },
                     icon = Icons.Filled.Explore,
                     text = "Discover",
                     isSelected = selectedItem == BottomNavigationItem.DISCOVER
                 )
-                ClickableColumn(
+                BottomBarItem(
                     modifier = weightModifier,
                     onClick = { onItemSelected(BottomNavigationItem.ME) },
                     icon = Icons.Filled.Person,
@@ -106,7 +106,7 @@ fun AppBottomBar(selectedItem: BottomNavigationItem, onItemSelected: (BottomNavi
 }
 
 @Composable
-fun ClickableColumn(
+fun BottomBarItem(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     icon: ImageVector,
