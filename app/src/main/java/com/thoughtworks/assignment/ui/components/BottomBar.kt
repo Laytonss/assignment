@@ -78,7 +78,7 @@ fun BottomBarItem(
     text: String,
     isSelected: Boolean
 ) {
-    val currentColor = if (isSelected) {
+    val iconAndTextColor = if (isSelected) {
         Color.Green
     } else {
         Color.White
@@ -88,8 +88,8 @@ fun BottomBarItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(icon, contentDescription = text, tint = currentColor)
-        Text(text = text, color = currentColor)
+        Icon(icon, contentDescription = text, tint = iconAndTextColor)
+        Text(text = text, color = iconAndTextColor)
     }
 }
 
