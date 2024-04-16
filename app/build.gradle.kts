@@ -72,8 +72,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    // hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofitConverter)
 }
 
 kapt {
