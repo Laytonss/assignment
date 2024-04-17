@@ -3,6 +3,7 @@ package com.thoughtworks.assignment.ui.components
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,10 +23,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -41,9 +44,15 @@ fun MomentsPage(
     mainViewModel: MainViewModel
 ) {
     val tweets by mainViewModel.tweet.collectAsState(initial = emptyList())
-    LazyColumn {
-        items(items = tweets) { tweet ->
-            TweetItem(tweet)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color(0xFF19191E))
+    ) {
+        LazyColumn {
+            items(items = tweets) { tweet ->
+                TweetItem(tweet)
+            }
         }
     }
 }
@@ -51,7 +60,9 @@ fun MomentsPage(
 @Composable
 @Preview(showBackground = true)
 fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
-    Row {
+    Row(
+        modifier = Modifier.padding(10.dp)
+    ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(tweet.sender?.avatar)
@@ -59,9 +70,24 @@ fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.size(50.dp)
+            modifier = Modifier
+                .size(50.dp)
+                .clip(RoundedCornerShape(8.dp))
         )
-        Text(text = tweet.sender?.nick ?: "no")
+        Column(
+            modifier = Modifier.padding(start = 10.dp),
+        ) {
+            Text(
+                text = tweet.sender?.nick ?: "no",
+                fontWeight = FontWeight.Bold,
+                color = Color(0xff808ca3)
+            )
+            Text(
+                text = tweet.content ?: "no content",
+                modifier = Modifier.padding(top = 5.dp),
+                color = Color.White
+            )
+        }
     }
 }
 
