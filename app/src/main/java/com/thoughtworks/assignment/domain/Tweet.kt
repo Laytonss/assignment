@@ -15,7 +15,7 @@ data class Tweet(
         return error != null || unknownError != null
     }
 
-    fun isHaveContent(): Boolean {
+    fun haveContent(): Boolean {
         return content != null
     }
 }
