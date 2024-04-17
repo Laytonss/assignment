@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,13 +22,14 @@ import androidx.compose.ui.graphics.Color
 import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -42,21 +44,73 @@ import com.thoughtworks.assignment.domain.Sender
 import com.thoughtworks.assignment.domain.Tweet
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.thoughtworks.assignment.domain.User
 
 @Composable
 fun MomentsPage(
     mainViewModel: MainViewModel
 ) {
     val tweets by mainViewModel.filterTweets.collectAsState(initial = emptyList())
+    val user by mainViewModel.user.collectAsState(User("", "", "", ""))
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(0xFF19191E))
     ) {
         LazyColumn {
+            item {
+                UserBackground(user)
+            }
             items(items = tweets) { tweet ->
                 TweetItem(tweet)
             }
+        }
+    }
+}
+
+@Composable
+fun UserBackground(user: User) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(400.dp)
+    ) {
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(user.profileImage)
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp)
+                .align(Alignment.TopCenter)
+                .graphicsLayer {
+                    scaleX = 1.0f
+                    scaleY = 1.0f
+                },
+        )
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(bottom = 10.dp),
+        ) {
+            Text(
+                text = user.nick,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier.padding(top = 5.dp)
+            )
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(user.avatar)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(100.dp)
+            )
         }
     }
 }
@@ -105,7 +159,9 @@ fun ImageGrid(images: List<Image>) {
     }
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
-        modifier = Modifier.padding(top = 5.dp).height(height.dp)
+        modifier = Modifier
+            .padding(top = 5.dp)
+            .height(height.dp)
     ) {
         items(images) { image ->
             AsyncImage(
