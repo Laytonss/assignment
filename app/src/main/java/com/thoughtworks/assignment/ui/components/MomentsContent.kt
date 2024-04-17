@@ -70,12 +70,12 @@ fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
             modifier = Modifier.padding(start = 10.dp),
         ) {
             Text(
-                text = tweet.sender?.nick ?: "no",
+                text = tweet.sender?.nick ?: throw RuntimeException(),
                 fontWeight = FontWeight.Bold,
                 color = Color(0xff808ca3)
             )
             Text(
-                text = tweet.content ?: "no content",
+                text = tweet.content ?: throw RuntimeException(),
                 modifier = Modifier.padding(top = 5.dp),
                 color = Color.White
             )
