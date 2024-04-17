@@ -14,11 +14,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.thoughtworks.assignment.ui.utils.Utils.getCurrentRoute
+import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
 
 
 enum class BottomNavigationItem {
@@ -27,14 +29,16 @@ enum class BottomNavigationItem {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyApp() {
+fun MyApp(
+    mainViewModel: MainViewModel = viewModel()
+) {
     val homeNavController = rememberNavController()
     NavHost(homeNavController, startDestination = "HomeContent") {
         composable("HomeContent") {
             HomeContent(homeNavController)
         }
         composable("Moments") {
-            MomentsPage()
+            MomentsPage(mainViewModel)
         }
     }
 }
