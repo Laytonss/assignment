@@ -16,11 +16,16 @@ import androidx.compose.ui.graphics.Color
 import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -74,11 +79,41 @@ fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
                 fontWeight = FontWeight.Bold,
                 color = Color(0xff808ca3)
             )
-            Text(
-                text = tweet.content ?: throw RuntimeException(),
-                modifier = Modifier.padding(top = 5.dp),
-                color = Color.White
-            )
+            TweetContent(tweet.content ?: throw RuntimeException())
+        }
+    }
+}
+
+@Composable
+fun TweetContent(text: String) {
+    if (text.length <= 150) {
+        Text(
+            text = text,
+            modifier = Modifier.padding(top = 5.dp),
+            color = Color.White
+        )
+    } else {
+        TextWithExpand(text)
+    }
+}
+
+@Composable
+fun TextWithExpand(text: String) {
+    var isExpand by remember { mutableStateOf(false) }
+    Text(
+        text = text,
+        modifier = Modifier.padding(top = 5.dp),
+        color = Color.White,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = if (isExpand) Int.MAX_VALUE else 3,
+    )
+    if(isExpand) {
+        Button(onClick = { isExpand = false }) {
+            Text(text = "show less")
+        }
+    } else {
+        Button(onClick = { isExpand = true }) {
+            Text(text = "show more")
         }
     }
 }
