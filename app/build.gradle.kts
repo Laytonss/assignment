@@ -87,6 +87,7 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata")
     //navigation
     implementation("androidx.navigation:navigation-compose:2.4.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }
 
 kapt {
