@@ -18,4 +18,6 @@ class MainViewModel @Inject constructor(
             !it.isError() && it.haveContent()
         }
     }
+
+    val user = repository.fetchUser()
 }
