@@ -18,6 +18,7 @@ import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -84,6 +85,7 @@ fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
             TweetContent(tweet.content ?: throw RuntimeException())
         }
     }
+    Divider(color = Color.Gray, thickness = 0.5.dp)
 }
 
 @Composable
