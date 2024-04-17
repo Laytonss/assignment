@@ -1,6 +1,7 @@
 package com.thoughtworks.assignment.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.thoughtworks.assignment.domain.Image
 import com.thoughtworks.assignment.domain.Sender
 import com.thoughtworks.assignment.domain.Tweet
@@ -107,14 +109,24 @@ fun TextWithExpand(text: String) {
         overflow = TextOverflow.Ellipsis,
         maxLines = if (isExpand) Int.MAX_VALUE else 3,
     )
-    if(isExpand) {
-        Button(onClick = { isExpand = false }) {
-            Text(text = "show less")
-        }
+    if (isExpand) {
+        Text(
+            text = "Show Less",
+            modifier = Modifier
+                .clickable { isExpand = false }
+                .padding(top = 5.dp),
+            fontSize = 15.sp,
+            color = Color(0xff808ca3),
+        )
     } else {
-        Button(onClick = { isExpand = true }) {
-            Text(text = "show more")
-        }
+        Text(
+            text = "Show More",
+            modifier = Modifier
+                .clickable { isExpand = true }
+                .padding(top = 5.dp),
+            fontSize = 15.sp,
+            color = Color(0xff808ca3)
+        )
     }
 }
 
