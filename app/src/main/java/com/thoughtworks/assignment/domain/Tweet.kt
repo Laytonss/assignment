@@ -10,4 +10,12 @@ data class Tweet(
     val error: String? = null,
     @SerializedName("unknown error")
     val unknownError: String? = null
-)
+) {
+    fun isError(): Boolean {
+        return error != null || unknownError != null
+    }
+
+    fun isHaveContent(): Boolean {
+        return content != null
+    }
+}
