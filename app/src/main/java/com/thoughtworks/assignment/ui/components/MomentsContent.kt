@@ -6,9 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -83,10 +87,42 @@ fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
                 color = Color(0xff808ca3)
             )
             TweetContent(tweet.content ?: throw RuntimeException())
+            tweet.images?.let {
+                ImageGrid(tweet.images)
+            }
         }
     }
     Divider(color = Color.Gray, thickness = 0.5.dp)
 }
+
+@Composable
+fun ImageGrid(images: List<Image>) {
+    val height = when (images.size) {
+        in 1..3 -> 100
+        in 4..6 -> 200
+        in 7..9 -> 300
+        else -> throw RuntimeException()
+    }
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
+        modifier = Modifier.padding(top = 5.dp).height(height.dp)
+    ) {
+        items(images) { image ->
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(image.url)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(2.dp)
+            )
+        }
+    }
+}
+
 
 @Composable
 fun TweetContent(text: String) {
