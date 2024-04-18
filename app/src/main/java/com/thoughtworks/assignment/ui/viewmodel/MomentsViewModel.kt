@@ -3,10 +3,10 @@ package com.thoughtworks.assignment.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thoughtworks.assignment.data.repository.TweetRepository
+import com.thoughtworks.assignment.data.repository.UserRepository
 import com.thoughtworks.assignment.domain.Tweet
 import com.thoughtworks.assignment.domain.User
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MomentsViewModel @Inject constructor(
-    private val repository: TweetRepository
+    private val tweetRepository: TweetRepository,
+    private val userRepository: UserRepository,
 ) : ViewModel() {
 
     private val _allTweets: MutableStateFlow<List<Tweet>> = MutableStateFlow(emptyList())
@@ -38,14 +39,14 @@ class MomentsViewModel @Inject constructor(
 
     private fun fetchTweets() {
         viewModelScope.launch {
-            val tweets = repository.fetchTweets()
+            val tweets = tweetRepository.fetchTweets()
             _allTweets.value = tweets
         }
     }
 
     private fun fetchUser() {
         viewModelScope.launch {
-            val user = repository.fetchUser()
+            val user = userRepository.fetchUser()
             _user.value = user
         }
     }

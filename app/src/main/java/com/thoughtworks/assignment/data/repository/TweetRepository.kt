@@ -7,12 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class TweetRepository {
-
     suspend fun fetchTweets(): List<Tweet> {
         return RetrofitClient.apiService.getTweets()
-    }
-
-    suspend fun fetchUser(): User {
-        return RetrofitClient.apiService.getUser()
     }
 }
