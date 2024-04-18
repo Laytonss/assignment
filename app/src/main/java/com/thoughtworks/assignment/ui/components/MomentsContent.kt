@@ -65,7 +65,7 @@ fun MomentsPage(
     val swipeState = rememberUltraSwipeRefreshState()
 
     LaunchedEffect(swipeState.isRefreshing) {
-        if(swipeState.isRefreshing) {
+        if (swipeState.isRefreshing) {
             tweetCount = 5
             swipeState.isRefreshing = false
         }
@@ -79,31 +79,29 @@ fun MomentsPage(
         }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color(0xFF19191E))
-    ) {
-        UltraSwipeRefresh(
-            state = swipeState,
-            onRefresh = {
-                swipeState.isRefreshing = true
-            },
-            onLoadMore = {
-                swipeState.isLoading = true
-            },
-            content = {
-                LazyColumn {
-                    item {
-                        UserBackground(user)
-                    }
-                    items(items = tweets) { tweet ->
-                        TweetItem(tweet)
-                    }
+    UltraSwipeRefresh(
+        state = swipeState,
+        onRefresh = {
+            swipeState.isRefreshing = true
+        },
+        onLoadMore = {
+            swipeState.isLoading = true
+        },
+        content = {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = Color(0xFF19191E))
+            ) {
+                item {
+                    UserBackground(user)
+                }
+                items(items = tweets) { tweet ->
+                    TweetItem(tweet)
                 }
             }
-        )
-    }
+        }
+    )
 }
 
 @Composable
