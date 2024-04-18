@@ -73,7 +73,7 @@ fun UserBackground(user: User) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(400.dp)
+            .height(350.dp)
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -91,27 +91,28 @@ fun UserBackground(user: User) {
                     scaleY = 1.0f
                 },
         )
-        Row(
+
+        Text(
+            text = user.nick,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
             modifier = Modifier
+                .padding(top = 5.dp)
                 .align(Alignment.BottomEnd)
-                .padding(bottom = 10.dp),
-        ) {
-            Text(
-                text = user.nick,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                modifier = Modifier.padding(top = 5.dp)
-            )
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(user.avatar)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.size(100.dp)
-            )
-        }
+                .padding(bottom = 60.dp, end = 100.dp),
+        )
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(user.avatar)
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(100.dp)
+                .align(Alignment.BottomEnd)
+                .padding(bottom = 25.dp),
+        )
     }
 }
 
