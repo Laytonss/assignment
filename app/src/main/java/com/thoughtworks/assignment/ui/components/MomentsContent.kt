@@ -50,8 +50,8 @@ import com.king.ultraswiperefresh.rememberUltraSwipeRefreshState
 import com.thoughtworks.assignment.domain.Comment
 import com.thoughtworks.assignment.domain.User
 import com.thoughtworks.assignment.ui.theme.BlueText
-import com.thoughtworks.assignment.ui.theme.CommentBlackGround
-import com.thoughtworks.assignment.ui.theme.GrayBlackGround
+import com.thoughtworks.assignment.ui.theme.CommentBackground
+import com.thoughtworks.assignment.ui.theme.GrayBackground
 
 @Composable
 fun MomentsPage(
@@ -90,7 +90,7 @@ fun MomentsPage(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = GrayBlackGround)
+                    .background(color = GrayBackground)
             ) {
                 item {
                     UserBackground(user)
@@ -195,7 +195,7 @@ fun Comments(comments: List<Comment>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(CommentBlackGround)
+            .background(CommentBackground)
     ) {
         comments.forEach { comment ->
             Row {

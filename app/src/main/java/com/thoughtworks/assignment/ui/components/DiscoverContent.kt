@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.thoughtworks.assignment.ui.theme.GrayBlackGround
+import com.thoughtworks.assignment.ui.theme.GrayBackground
 
 @Composable
 fun DiscoverPage(navController: NavHostController, modifier: Modifier) {
@@ -60,7 +60,7 @@ fun DiscoverItem(
             .clickable { onClick() }
             .fillMaxWidth()
             .height(60.dp)
-            .background(GrayBlackGround),
+            .background(GrayBackground),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
