@@ -62,7 +62,7 @@ fun HomeContent(homeNavController: NavHostController) {
             AppBottomBar(navController, selectedItem) { newItem -> setSelectedItem(newItem) }
         },
     ) { innerPadding ->
-        NavHost(navController, startDestination = "Discover") {
+        NavHost(navController, startDestination = "Chats") {
             composable("Chats") {
                 EmptyPage()
             }
