@@ -7,6 +7,7 @@ import com.thoughtworks.assignment.data.repository.UserRepository
 import com.thoughtworks.assignment.domain.Tweet
 import com.thoughtworks.assignment.domain.User
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -48,6 +49,18 @@ class MomentsViewModel @Inject constructor(
         viewModelScope.launch {
             val user = userRepository.fetchUser()
             _user.value = user
+        }
+    }
+
+    fun getTweets(count: Int): Flow<List<Tweet>> {
+        return filterTweets.map { tweets ->
+            tweets.take(count)
+        }
+    }
+
+    fun getTweetsCount(): Flow<Int> {
+        return filterTweets.map { tweets ->
+            tweets.size
         }
     }
 }

@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,6 +37,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -54,7 +56,9 @@ import com.thoughtworks.assignment.domain.User
 fun MomentsPage(
     momentsViewModel: MomentsViewModel
 ) {
-    val tweets by momentsViewModel.filterTweets.collectAsState(initial = emptyList())
+    var tweetCount by remember { mutableIntStateOf(5) }
+    val tweets by momentsViewModel.getTweets(tweetCount).collectAsState(initial = emptyList())
+    val tweetTotalCount by momentsViewModel.getTweetsCount().collectAsState(initial = 0)
     val user by momentsViewModel.user.collectAsState(User("", "", "", ""))
     Box(
         modifier = Modifier
@@ -67,6 +71,19 @@ fun MomentsPage(
             }
             items(items = tweets) { tweet ->
                 TweetItem(tweet)
+            }
+            if(tweetCount < tweetTotalCount) {
+                item {
+                    Text(
+                        text = "show more tweets",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(5.dp)
+                            .clickable { tweetCount += 5 },
+                        textAlign = TextAlign.Center,
+                        color = Color.White,
+                    )
+                }
             }
         }
     }
