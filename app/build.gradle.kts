@@ -89,6 +89,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.0")
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
+
+    implementation("com.github.jenly1314.UltraSwipeRefresh:refresh:1.1.0")
 }
 
 kapt {

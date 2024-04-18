@@ -38,7 +38,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -50,8 +49,8 @@ import com.thoughtworks.assignment.domain.Sender
 import com.thoughtworks.assignment.domain.Tweet
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.king.ultraswiperefresh.UltraSwipeRefresh
+import com.king.ultraswiperefresh.rememberUltraSwipeRefreshState
 import com.thoughtworks.assignment.domain.Comment
 import com.thoughtworks.assignment.domain.User
 
@@ -60,24 +59,39 @@ fun MomentsPage(
     momentsViewModel: MomentsViewModel
 ) {
     var tweetCount by remember { mutableIntStateOf(5) }
-    val tweets by momentsViewModel.getTweets(tweetCount).collectAsState(initial = emptyList())
     val tweetTotalCount by momentsViewModel.getTweetsCount().collectAsState(initial = 0)
+    val tweets by momentsViewModel.getTweets(tweetCount).collectAsState(initial = emptyList())
     val user by momentsViewModel.user.collectAsState(User("", "", "", ""))
-    var isRefresh by remember { mutableStateOf(false) }
-    
-    LaunchedEffect(isRefresh) {
-        tweetCount = 5
-        isRefresh = false
+    val swipeState = rememberUltraSwipeRefreshState()
+
+    LaunchedEffect(swipeState.isRefreshing) {
+        if(swipeState.isRefreshing) {
+            tweetCount = 5
+            swipeState.isRefreshing = false
+        }
     }
-    
+
+    LaunchedEffect(swipeState.isLoading) {
+        if (swipeState.isLoading) {
+            tweetCount += 5
+            if (tweetCount > tweetTotalCount) tweetCount = tweetTotalCount
+            swipeState.isLoading = false
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(0xFF19191E))
     ) {
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefresh),
-            onRefresh = { isRefresh = true },
+        UltraSwipeRefresh(
+            state = swipeState,
+            onRefresh = {
+                swipeState.isRefreshing = true
+            },
+            onLoadMore = {
+                swipeState.isLoading = true
+            },
             content = {
                 LazyColumn {
                     item {
@@ -85,20 +99,6 @@ fun MomentsPage(
                     }
                     items(items = tweets) { tweet ->
                         TweetItem(tweet)
-                    }
-                    if (tweetCount < tweetTotalCount) {
-                        item {
-                            Text(
-                                text = "show more tweets",
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(5.dp)
-                                    .clickable { tweetCount += 5 },
-                                textAlign = TextAlign.Center,
-                                color = Color.White,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
                     }
                 }
             }
