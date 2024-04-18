@@ -26,11 +26,11 @@ fun MyApp(
     momentsViewModel: MomentsViewModel = viewModel()
 ) {
     val homeNavController = rememberNavController()
-    NavHost(homeNavController, startDestination = "HomeContent") {
-        composable("HomeContent") {
+    NavHost(homeNavController, startDestination = Constants.HOME_CONTENT) {
+        composable(Constants.HOME_CONTENT) {
             HomeContent(homeNavController)
         }
-        composable("Moments") {
+        composable(Constants.MOMENTS) {
             MomentsPage(momentsViewModel)
         }
     }

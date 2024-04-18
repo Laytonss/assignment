@@ -5,4 +5,7 @@ object Constants {
     const val BOTTOM_CONTACTS = "Contacts"
     const val BOTTOM_DISCOVER = "Discover"
     const val BOTTOM_ME = "Me"
+
+    const val HOME_CONTENT = "HomeContent"
+    const val MOMENTS = "Moments"
 }
