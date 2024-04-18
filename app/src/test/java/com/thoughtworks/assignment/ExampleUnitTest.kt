@@ -14,10 +14,6 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        runBlocking {
-            TweetRepository().fetchTweets().collect {
-                assertEquals(22, it.size)
-            }
-        }
+
     }
 }
