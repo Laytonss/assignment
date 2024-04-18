@@ -2,6 +2,7 @@ package com.thoughtworks.assignment.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,7 +23,10 @@ import androidx.compose.ui.graphics.Color
 import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -147,9 +151,28 @@ fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
             tweet.images?.let {
                 ImageGrid(tweet.images)
             }
+            TweetBottom()
         }
     }
     Divider(color = Color.Gray, thickness = 0.5.dp)
+}
+
+@Composable
+private fun TweetBottom() {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(top = 5.dp),
+    ) {
+        Text(
+            text = "8 minutes ago",
+            color = Color.Gray,
+            modifier = Modifier.weight(1f)
+        )
+        Icon(
+            imageVector = Icons.Filled.MoreHoriz,
+            contentDescription = null,
+            tint = Color(0xff808ca3),
+        )
+    }
 }
 
 @Composable
