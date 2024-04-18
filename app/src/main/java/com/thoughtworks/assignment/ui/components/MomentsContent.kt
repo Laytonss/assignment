@@ -39,13 +39,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.thoughtworks.assignment.domain.Image
-import com.thoughtworks.assignment.domain.Sender
 import com.thoughtworks.assignment.domain.Tweet
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
