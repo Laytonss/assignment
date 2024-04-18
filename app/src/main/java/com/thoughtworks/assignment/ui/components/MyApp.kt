@@ -46,7 +46,7 @@ fun HomeContent(homeNavController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = title ?: "wrong title") },
+                title = { Text(text = title ?: "") },
                 colors = topAppBarColors(containerColor = Color.Black, titleContentColor = Color.White)
             )
         },
