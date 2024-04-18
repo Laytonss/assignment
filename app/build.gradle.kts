@@ -90,6 +90,11 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
 
+    testImplementation(libs.mockito)
+    testImplementation(libs.mockitoInile)
+    testImplementation(libs.coreTesting)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
+
     implementation("com.github.jenly1314.UltraSwipeRefresh:refresh:1.1.0")
 }
 
