@@ -47,6 +47,7 @@ import com.thoughtworks.assignment.domain.Sender
 import com.thoughtworks.assignment.domain.Tweet
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.thoughtworks.assignment.domain.Comment
 import com.thoughtworks.assignment.domain.User
 
 @Composable
@@ -151,15 +152,43 @@ fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
                 ImageGrid(tweet.images)
             }
             TweetBottom()
+            tweet.comments?.let {
+                Comments(it)
+            }
         }
     }
     Divider(color = Color.Gray, thickness = 0.5.dp)
 }
 
 @Composable
+fun Comments(comments: List<Comment>) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(0xff202020))
+    ) {
+        comments.forEach { comment ->
+            Row {
+                Text(
+                    text = "${comment.sender.nick ?: "anonymous"}: ",
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xff808ca3)
+                )
+                Text(
+                    text = comment.content,
+                    color = Color.White
+                )
+            }
+        }
+    }
+}
+
+@Composable
 private fun TweetBottom() {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(top = 5.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 5.dp),
     ) {
         Text(
             text = "8 minutes ago",
