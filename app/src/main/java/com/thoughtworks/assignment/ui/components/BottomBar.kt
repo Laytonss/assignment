@@ -22,12 +22,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.thoughtworks.assignment.Constants
+import com.thoughtworks.assignment.ui.theme.GrayBlackGround
 import com.thoughtworks.assignment.ui.utils.Utils.getCurrentRoute
 
 @Composable
 fun AppBottomBar(navController: NavHostController) {
     BottomAppBar(
-        containerColor = Color(0xFF19191E),
+        containerColor = GrayBlackGround,
         actions = {
             Row(
                 modifier = Modifier

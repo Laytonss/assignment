@@ -49,6 +49,9 @@ import com.king.ultraswiperefresh.UltraSwipeRefresh
 import com.king.ultraswiperefresh.rememberUltraSwipeRefreshState
 import com.thoughtworks.assignment.domain.Comment
 import com.thoughtworks.assignment.domain.User
+import com.thoughtworks.assignment.ui.theme.BlueText
+import com.thoughtworks.assignment.ui.theme.CommentBlackGround
+import com.thoughtworks.assignment.ui.theme.GrayBlackGround
 
 @Composable
 fun MomentsPage(
@@ -87,7 +90,7 @@ fun MomentsPage(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = Color(0xFF19191E))
+                    .background(color = GrayBlackGround)
             ) {
                 item {
                     UserBackground(user)
@@ -170,7 +173,7 @@ fun TweetItem(tweet: Tweet) {
             Text(
                 text = tweet.sender?.nick ?: throw RuntimeException(),
                 fontWeight = FontWeight.Bold,
-                color = Color(0xff808ca3)
+                color = BlueText
             )
             tweet.content?.let {
                 TweetContent(tweet.content)
@@ -192,14 +195,14 @@ fun Comments(comments: List<Comment>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color(0xff202020))
+            .background(CommentBlackGround)
     ) {
         comments.forEach { comment ->
             Row {
                 Text(
                     text = "${comment.sender.nick ?: "anonymous"}: ",
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xff808ca3)
+                    color = BlueText
                 )
                 Text(
                     text = comment.content,
@@ -225,7 +228,7 @@ private fun TweetBottom() {
         Icon(
             imageVector = Icons.Filled.MoreHoriz,
             contentDescription = null,
-            tint = Color(0xff808ca3),
+            tint = BlueText,
         )
     }
 }
@@ -291,7 +294,7 @@ fun TextWithExpand(text: String) {
                 .clickable { isExpand = false }
                 .padding(top = 5.dp),
             fontSize = 15.sp,
-            color = Color(0xff808ca3),
+            color = BlueText,
         )
     } else {
         Text(
@@ -300,7 +303,7 @@ fun TextWithExpand(text: String) {
                 .clickable { isExpand = true }
                 .padding(top = 5.dp),
             fontSize = 15.sp,
-            color = Color(0xff808ca3)
+            color = BlueText
         )
     }
 }
