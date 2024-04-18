@@ -3,7 +3,6 @@ package com.thoughtworks.assignment.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,20 +30,18 @@ import com.thoughtworks.assignment.ui.theme.GrayBackground
 
 @Composable
 fun DiscoverPage(navController: NavHostController, modifier: Modifier) {
-    Box(
+    Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        Column {
-            DiscoverItem(Icons.Filled.Language, Color.Cyan, "Moments") { navController.navigate("Moments") }
-            Spacer(modifier = Modifier.height(5.dp))
-            DiscoverItem(Icons.Filled.WifiChannel, Color.Yellow, "Channels")
-            DiscoverItem(Icons.Filled.Radar, Color.Red, "Live")
-            Spacer(modifier = Modifier.height(5.dp))
-            DiscoverItem(Icons.Filled.LiveTv, Color.Blue, "Scan")
-            DiscoverItem(Icons.Filled.MusicNote, Color.Red, "Listen")
-        }
+        DiscoverItem(Icons.Filled.Language, Color.Cyan, "Moments") { navController.navigate("Moments") }
+        Spacer(modifier = Modifier.height(5.dp))
+        DiscoverItem(Icons.Filled.WifiChannel, Color.Yellow, "Channels")
+        DiscoverItem(Icons.Filled.Radar, Color.Red, "Live")
+        Spacer(modifier = Modifier.height(5.dp))
+        DiscoverItem(Icons.Filled.LiveTv, Color.Blue, "Scan")
+        DiscoverItem(Icons.Filled.MusicNote, Color.Red, "Listen")
     }
 }
 
