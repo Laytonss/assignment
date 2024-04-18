@@ -61,12 +61,23 @@ fun DiscoverItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Icon(icon, contentDescription = text, tint = iconColor, modifier = Modifier.padding(start = 10.dp))
+        Icon(icon,
+            contentDescription = text,
+            tint = iconColor,
+            modifier = Modifier.padding(start = 10.dp)
+        )
         Text(
-            text = text, color = Color.White, modifier = Modifier
+            text = text,
+            color = Color.White,
+            modifier = Modifier
                 .weight(1f)
                 .padding(start = 20.dp)
         )
-        Icon(Icons.Filled.ArrowForwardIos, contentDescription = text, tint = Color.Gray, modifier = Modifier.padding(end = 10.dp))
+        Icon(
+            Icons.Filled.ArrowForwardIos,
+            contentDescription = text,
+            tint = Color.Gray,
+            modifier = Modifier.padding(end = 10.dp)
+        )
     }
 }
