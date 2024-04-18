@@ -25,6 +25,12 @@ class MomentsViewModel @Inject constructor(
     private val _user: MutableStateFlow<User> = MutableStateFlow(User("", "", "", ""))
     val user: StateFlow<User> = _user.asStateFlow()
 
+    val filterTweets = allTweets.map { tweets ->
+        tweets.filter {
+            !it.isError() && it.haveContentOrImage()
+        }
+    }
+
     init {
         fetchTweets()
         fetchUser()
@@ -41,12 +47,6 @@ class MomentsViewModel @Inject constructor(
         viewModelScope.launch {
             val user = repository.fetchUser()
             _user.value = user
-        }
-    }
-
-    val filterTweets = allTweets.map { tweets ->
-        tweets.filter {
-            !it.isError() && it.haveContentOrImage()
         }
     }
 }
