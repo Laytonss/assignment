@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.thoughtworks.assignment.Constants
 import com.thoughtworks.assignment.ui.utils.Utils.getCurrentRoute
 
 @Composable
@@ -38,31 +39,31 @@ fun AppBottomBar(navController: NavHostController) {
                     .fillMaxSize()
                 BottomBarItem(
                     modifier = weightModifier,
-                    onClick = { navController.navigate("Chats") },
+                    onClick = { navController.navigate(Constants.BOTTOM_CHATS) },
                     icon = Icons.Filled.Chat,
-                    text = "Chats",
-                    isSelected = getCurrentRoute(navController) == "Chats"
+                    text = Constants.BOTTOM_CHATS,
+                    isSelected = getCurrentRoute(navController) == Constants.BOTTOM_CHATS
                 )
                 BottomBarItem(
                     modifier = weightModifier,
-                    onClick = { navController.navigate("Contacts") },
+                    onClick = { navController.navigate(Constants.BOTTOM_CONTACTS) },
                     icon = Icons.Filled.Group,
-                    text = "Contacts",
-                    isSelected = getCurrentRoute(navController) == "Contacts"
+                    text = Constants.BOTTOM_CONTACTS,
+                    isSelected = getCurrentRoute(navController) == Constants.BOTTOM_CONTACTS
                 )
                 BottomBarItem(
                     modifier = weightModifier,
-                    onClick = { navController.navigate("Discover") },
+                    onClick = { navController.navigate(Constants.BOTTOM_DISCOVER) },
                     icon = Icons.Filled.Explore,
-                    text = "Discover",
-                    isSelected = getCurrentRoute(navController) == "Discover"
+                    text = Constants.BOTTOM_DISCOVER,
+                    isSelected = getCurrentRoute(navController) == Constants.BOTTOM_DISCOVER
                 )
                 BottomBarItem(
                     modifier = weightModifier,
-                    onClick = { navController.navigate("Me") },
+                    onClick = { navController.navigate(Constants.BOTTOM_ME) },
                     icon = Icons.Filled.Person,
-                    text = "Me",
-                    isSelected = getCurrentRoute(navController) == "Me"
+                    text = Constants.BOTTOM_ME,
+                    isSelected = getCurrentRoute(navController) == Constants.BOTTOM_ME
                 )
             }
         }

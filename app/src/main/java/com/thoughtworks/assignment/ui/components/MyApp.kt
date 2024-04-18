@@ -17,6 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.thoughtworks.assignment.Constants
 import com.thoughtworks.assignment.ui.utils.Utils.getCurrentRoute
 import com.thoughtworks.assignment.ui.viewmodel.MomentsViewModel
 
@@ -53,17 +54,17 @@ fun HomeContent(homeNavController: NavHostController) {
             AppBottomBar(navController)
         },
     ) { innerPadding ->
-        NavHost(navController, startDestination = "Chats") {
-            composable("Chats") {
+        NavHost(navController, startDestination = Constants.BOTTOM_CHATS) {
+            composable(Constants.BOTTOM_CHATS) {
                 EmptyPage()
             }
-            composable("Contacts") {
+            composable(Constants.BOTTOM_CONTACTS) {
                 EmptyPage()
             }
-            composable("Discover") {
+            composable(Constants.BOTTOM_DISCOVER) {
                 DiscoverPage(homeNavController, modifier = Modifier.padding(innerPadding))
             }
-            composable("Me") {
+            composable(Constants.BOTTOM_ME) {
                 EmptyPage()
             }
         }
