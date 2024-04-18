@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,6 +50,8 @@ import com.thoughtworks.assignment.domain.Sender
 import com.thoughtworks.assignment.domain.Tweet
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.thoughtworks.assignment.domain.Comment
 import com.thoughtworks.assignment.domain.User
 
@@ -60,32 +63,46 @@ fun MomentsPage(
     val tweets by momentsViewModel.getTweets(tweetCount).collectAsState(initial = emptyList())
     val tweetTotalCount by momentsViewModel.getTweetsCount().collectAsState(initial = 0)
     val user by momentsViewModel.user.collectAsState(User("", "", "", ""))
+    var isRefresh by remember { mutableStateOf(false) }
+    
+    LaunchedEffect(isRefresh) {
+        tweetCount = 5
+        isRefresh = false
+    }
+    
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(0xFF19191E))
     ) {
-        LazyColumn {
-            item {
-                UserBackground(user)
-            }
-            items(items = tweets) { tweet ->
-                TweetItem(tweet)
-            }
-            if(tweetCount < tweetTotalCount) {
-                item {
-                    Text(
-                        text = "show more tweets",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(5.dp)
-                            .clickable { tweetCount += 5 },
-                        textAlign = TextAlign.Center,
-                        color = Color.White,
-                    )
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(isRefresh),
+            onRefresh = { isRefresh = true },
+            content = {
+                LazyColumn {
+                    item {
+                        UserBackground(user)
+                    }
+                    items(items = tweets) { tweet ->
+                        TweetItem(tweet)
+                    }
+                    if (tweetCount < tweetTotalCount) {
+                        item {
+                            Text(
+                                text = "show more tweets",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(5.dp)
+                                    .clickable { tweetCount += 5 },
+                                textAlign = TextAlign.Center,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
                 }
             }
-        }
+        )
     }
 }
 
