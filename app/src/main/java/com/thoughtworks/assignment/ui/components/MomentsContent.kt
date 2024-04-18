@@ -2,7 +2,6 @@ package com.thoughtworks.assignment.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +19,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
+import com.thoughtworks.assignment.ui.viewmodel.MomentsViewModel
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -52,10 +51,10 @@ import com.thoughtworks.assignment.domain.User
 
 @Composable
 fun MomentsPage(
-    mainViewModel: MainViewModel
+    momentsViewModel: MomentsViewModel
 ) {
-    val tweets by mainViewModel.filterTweets.collectAsState(initial = emptyList())
-    val user by mainViewModel.user.collectAsState(User("", "", "", ""))
+    val tweets by momentsViewModel.filterTweets.collectAsState(initial = emptyList())
+    val user by momentsViewModel.user.collectAsState(User("", "", "", ""))
     Box(
         modifier = Modifier
             .fillMaxSize()

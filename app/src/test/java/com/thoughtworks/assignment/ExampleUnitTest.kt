@@ -1,7 +1,6 @@
 package com.thoughtworks.assignment
 
 import com.thoughtworks.assignment.data.repository.TweetRepository
-import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 

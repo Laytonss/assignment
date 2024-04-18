@@ -20,7 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.thoughtworks.assignment.ui.utils.Utils.getCurrentRoute
-import com.thoughtworks.assignment.ui.viewmodel.MainViewModel
+import com.thoughtworks.assignment.ui.viewmodel.MomentsViewModel
 
 
 enum class BottomNavigationItem {
@@ -30,7 +30,7 @@ enum class BottomNavigationItem {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyApp(
-    mainViewModel: MainViewModel = viewModel()
+    momentsViewModel: MomentsViewModel = viewModel()
 ) {
     val homeNavController = rememberNavController()
     NavHost(homeNavController, startDestination = "HomeContent") {
@@ -38,7 +38,7 @@ fun MyApp(
             HomeContent(homeNavController)
         }
         composable("Moments") {
-            MomentsPage(mainViewModel)
+            MomentsPage(momentsViewModel)
         }
     }
 }

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class MomentsViewModel @Inject constructor(
     private val repository: TweetRepository
 ) : ViewModel() {
 
