@@ -56,7 +56,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -73,29 +72,21 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    // hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    //retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofitConverter)
-    implementation("tech.thdev:flow-call-adapter-factory:1.0.0")
-    //viewmodel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    //livedata
-    implementation("androidx.compose.runtime:runtime-livedata")
-    //navigation
-    implementation("androidx.navigation:navigation-compose:2.4.0")
-    implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
-
+    implementation(libs.flow.call.adapter.factory)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.accompanist.swiperefresh)
     testImplementation(libs.mockito)
     testImplementation(libs.mockitoInile)
     testImplementation(libs.coreTesting)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
-
-    implementation("com.github.jenly1314.UltraSwipeRefresh:refresh:1.1.0")
+    testImplementation(libs.kotlinx.coroutines.test)
+    implementation(libs.refresh)
 }
 
 kapt {
