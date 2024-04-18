@@ -10,8 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -22,12 +20,6 @@ import androidx.navigation.compose.rememberNavController
 import com.thoughtworks.assignment.ui.utils.Utils.getCurrentRoute
 import com.thoughtworks.assignment.ui.viewmodel.MomentsViewModel
 
-
-enum class BottomNavigationItem {
-    CHATS, CONTACTS, DISCOVER, ME
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyApp(
     momentsViewModel: MomentsViewModel = viewModel()
@@ -48,7 +40,6 @@ fun MyApp(
 @OptIn(ExperimentalMaterial3Api::class)
 fun HomeContent(homeNavController: NavHostController) {
     val navController = rememberNavController()
-    val (selectedItem, setSelectedItem) = remember { mutableStateOf(BottomNavigationItem.DISCOVER) }
     val title = getCurrentRoute(navController)
 
     Scaffold(
@@ -59,7 +50,7 @@ fun HomeContent(homeNavController: NavHostController) {
             )
         },
         bottomBar = {
-            AppBottomBar(navController, selectedItem) { newItem -> setSelectedItem(newItem) }
+            AppBottomBar(navController)
         },
     ) { innerPadding ->
         NavHost(navController, startDestination = "Chats") {

@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import com.thoughtworks.assignment.ui.utils.Utils.getCurrentRoute
 
 @Composable
-fun AppBottomBar(navController: NavHostController, selectedItem: BottomNavigationItem, onItemSelected: (BottomNavigationItem) -> Unit) {
+fun AppBottomBar(navController: NavHostController) {
     BottomAppBar(
         containerColor = Color(0xFF19191E),
         actions = {
