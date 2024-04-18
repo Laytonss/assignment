@@ -8,4 +8,10 @@ object Constants {
 
     const val HOME_CONTENT = "HomeContent"
     const val MOMENTS = "Moments"
+
+    const val DISCOVER_MOMENTS = "Moments"
+    const val DISCOVER_CHANNELS = "Channels"
+    const val DISCOVER_LIVE = "Live"
+    const val DISCOVER_SCAN = "Scan"
+    const val DISCOVER_LISTEN = "Listen"
 }

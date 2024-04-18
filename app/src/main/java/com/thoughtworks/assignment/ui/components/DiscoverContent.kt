@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.thoughtworks.assignment.Constants
 import com.thoughtworks.assignment.ui.theme.GrayBackground
 
 @Composable
@@ -35,13 +36,13 @@ fun DiscoverPage(navController: NavHostController, modifier: Modifier) {
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        DiscoverItem(Icons.Filled.Language, Color.Cyan, "Moments") { navController.navigate("Moments") }
+        DiscoverItem(Icons.Filled.Language, Color.Cyan, Constants.DISCOVER_MOMENTS) { navController.navigate(Constants.DISCOVER_MOMENTS) }
         Spacer(modifier = Modifier.height(5.dp))
-        DiscoverItem(Icons.Filled.WifiChannel, Color.Yellow, "Channels")
-        DiscoverItem(Icons.Filled.Radar, Color.Red, "Live")
+        DiscoverItem(Icons.Filled.WifiChannel, Color.Yellow, Constants.DISCOVER_CHANNELS)
+        DiscoverItem(Icons.Filled.Radar, Color.Red, Constants.DISCOVER_LIVE)
         Spacer(modifier = Modifier.height(5.dp))
-        DiscoverItem(Icons.Filled.LiveTv, Color.Blue, "Scan")
-        DiscoverItem(Icons.Filled.MusicNote, Color.Red, "Listen")
+        DiscoverItem(Icons.Filled.LiveTv, Color.Blue, Constants.DISCOVER_SCAN)
+        DiscoverItem(Icons.Filled.MusicNote, Color.Red, Constants.DISCOVER_LISTEN)
     }
 }
 
@@ -61,7 +62,8 @@ fun DiscoverItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Icon(icon,
+        Icon(
+            icon,
             contentDescription = text,
             tint = iconColor,
             modifier = Modifier.padding(start = 10.dp)
