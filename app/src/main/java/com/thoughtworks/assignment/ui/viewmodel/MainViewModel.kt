@@ -15,7 +15,7 @@ class MainViewModel @Inject constructor(
 
     val filterTweets = allTweets.map { tweets ->
         tweets.filter {
-            !it.isError() && it.haveContent()
+            !it.isError() && it.haveContentOrImage()
         }
     }
 

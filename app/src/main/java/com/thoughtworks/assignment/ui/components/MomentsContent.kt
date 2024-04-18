@@ -141,7 +141,9 @@ fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
                 fontWeight = FontWeight.Bold,
                 color = Color(0xff808ca3)
             )
-            TweetContent(tweet.content ?: throw RuntimeException())
+            tweet.content?.let {
+                TweetContent(tweet.content)
+            }
             tweet.images?.let {
                 ImageGrid(tweet.images)
             }
