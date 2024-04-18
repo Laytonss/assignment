@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.flow
 
 class TweetRepository {
 
-    fun fetchTweets(): Flow<List<Tweet>> {
+    suspend fun fetchTweets(): List<Tweet> {
         return RetrofitClient.apiService.getTweets()
     }
 
-    fun fetchUser(): Flow<User> {
+    suspend fun fetchUser(): User {
         return RetrofitClient.apiService.getUser()
     }
 }
