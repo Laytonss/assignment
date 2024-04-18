@@ -153,8 +153,7 @@ fun UserBackground(user: User) {
 }
 
 @Composable
-@Preview(showBackground = true)
-fun TweetItem(@PreviewParameter(BackgroundColorProvider::class) tweet: Tweet) {
+fun TweetItem(tweet: Tweet) {
     Row(
         modifier = Modifier.padding(10.dp)
     ) {
@@ -308,19 +307,4 @@ fun TextWithExpand(text: String) {
             color = Color(0xff808ca3)
         )
     }
-}
-
-class BackgroundColorProvider : PreviewParameterProvider<Tweet> {
-    override val values: Sequence<Tweet> = sequenceOf(
-        Tweet(
-            content = "content1",
-            images = arrayListOf(
-                Image("https://xianmobilelab.gitlab.io/moments-data/images/tweets/001.jpeg")
-            ),
-            sender = Sender("name1", "nick1", "https://xianmobilelab.gitlab.io/moments-data/images/user/avatar/001.jpeg"),
-            comments = emptyList()
-        ),
-        Tweet("content2", emptyList(), Sender("name2", "nick1", "avatar1"), emptyList()),
-        Tweet("content3", emptyList(), Sender("name3", "nick1", "avatar1"), emptyList()),
-    )
 }
